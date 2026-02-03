@@ -43,6 +43,11 @@
   .md-sidebar {
     background-color: transparent;
   }
+
+  /* 隐藏左侧导航栏顶部的网站标题文字 */
+  .md-nav__title {
+    display: none; /* 或者是 visibility: hidden */
+  }
   
   /* =========================================
      4. 图片优化
