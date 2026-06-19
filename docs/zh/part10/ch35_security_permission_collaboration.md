@@ -1,6 +1,6 @@
 # 第35章：数据工程 Agent 的安全、权限与人机协同
 
-<div class="chapter-authors">汪志立（ZhiLi Wang）</div>
+<div class="chapter-authors">骆阳（Yang Luo）；汪志立（Zhili Wang）；於俊（Jun Yu）</div>
 
 ---
 
@@ -86,7 +86,7 @@ Agent 的工具调用必须受限于白名单机制。工具白名单不仅定�
 
 ### 35.1.3 审批闸门的分层设计
 
-![Agent 权限分层审批流程](../../images/part10/ai_agent_decision_workflow_ch35_01.psvg)
+![Agent 权限分层审批流程](../../images/part10/ai_agent_decision_workflow_ch35_01.svg)
 
 **图35-1：Agent 权限分层审批流程**
 

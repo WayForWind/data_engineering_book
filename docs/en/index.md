@@ -2,7 +2,7 @@
 
 ## Full Table of Contents Overview
 
-The current Chinese mainline uses the 2026 Springer-size publication structure. The main text covers 48 chapters, 15 end-to-end projects, and 7 appendices (A-G). To reduce friction when reading across parts, this edition adds a unified abbreviation table in the front matter and provides a contents page for each part.
+The current Chinese mainline uses the 2026 Springer-size publication structure. The main text covers 48 chapters, 15 end-to-end projects, and 8 appendices (A-H). To reduce friction when reading across parts, this edition adds a unified abbreviation table in the front matter and provides a contents page for each part.
 
 - [Title Page](title_page.md)
 - [Preface](preface.md)
@@ -31,7 +31,7 @@ The current Chinese mainline uses the 2026 Springer-size publication structure. 
 - [Appendix E: Common Data-Engineering Bug Debugging Manual](appendix_e_common_bug_debugging_manual.md)
 - [Appendix F: Terminology and Chinese-English Mapping](appendix_f_terminology_and_chinese_english_mapping.md)
 - [Appendix G: DataGallery Open-source Ecosystem Overview](appendix_g_datagallery_note.md)
-- [Appendix H: MindSpore Overview and Acknowledgments](appendix_h_mindspore_note.md)
+- [Appendix H: MindSpore Technical Appendix and Acknowledgments](appendix_h_mindspore_note.md)
 
 ## Part-by-Part Contents
 
@@ -191,4 +191,4 @@ This part connects acquisition, cleaning, synthesis, RAG, agents, DataOps, priva
 - [Appendix E: Common Data-Engineering Bug Debugging Manual](appendix_e_common_bug_debugging_manual.md)
 - [Appendix F: Terminology and Chinese-English Mapping](appendix_f_terminology_and_chinese_english_mapping.md)
 - [Appendix G: DataGallery Open-source Ecosystem Overview](appendix_g_datagallery_note.md)
-- [Appendix H: MindSpore Overview and Acknowledgments](appendix_h_mindspore_note.md)
+- [Appendix H: MindSpore Technical Appendix and Acknowledgments](appendix_h_mindspore_note.md)

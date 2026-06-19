@@ -1,6 +1,6 @@
 # Project 14: Video Generation Dataset — From Video Sources to a T2V-Training-Ready Data Pipeline
 
-<div class="chapter-authors">Ran Zhang</div>
+<div class="chapter-authors">Yang Luo; Ran Zhang; Wenzhuo Du</div>
 
 ## Abstract
 
@@ -338,6 +338,8 @@ The second is **sharded execution**. CPU stages use multi-process workers; GPU s
 The third is **GPU memory degradation**. `aesthetic_filter.py`, `caption_with_vlm.py`, and `shot_language_tagger.py` all incorporate `DegradePolicy` and `safe_call`. When an OOM error occurs, the script progressively reduces batch size, frame count, maximum resolution, or generation length rather than terminating the entire pipeline. For video tasks, this is important because the frame complexity and model input length vary greatly across shots, and a statically fixed batch size is easily disrupted by individual outlier samples.
 
 Table P14-2 summarizes the key runtime parameters and their effects.
+
+*Table P14-2: Key runtime parameters of the video generation data pipeline*
 
 | Parameter | Default or Example | Scope of Effect | Tuning Recommendation |
 | --- | --- | --- | --- |

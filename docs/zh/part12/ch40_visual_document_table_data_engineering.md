@@ -1,6 +1,6 @@
 # 第40章：视觉文档与表格数据工程：结构化抽取、稀疏表格与 Schema 约束
 
-<div class="chapter-authors">Guanjun Liu；Yuefeng Zou</div>
+<div class="chapter-authors">刘冠君（Guanjun Liu）；邹月峰（Yuefeng Zou）</div>
 
 ## 摘要
 

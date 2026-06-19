@@ -1,6 +1,6 @@
 # Chapter 2: LLM Data Lifecycle and Quality Assessment Framework
 
-<div class="chapter-authors">Ke Wang</div>
+<div class="chapter-authors">Jun Yu; Changwen Chen; Ke Wang</div>
 
 ## Abstract
 

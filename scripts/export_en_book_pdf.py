@@ -42,12 +42,22 @@ OPENING_FRONT_PDF = PARTS_DIR / "00a-opening-front-matter.pdf"
 CONTENTS_PDF = PARTS_DIR / "00b-contents.pdf"
 SUBMISSION_PDF_DIR = OUT_DIR / "data_engineering_book_en_16k_compact_submission_pdfs"
 PDF_TEXT_CACHE: dict[str, dict[int, str]] = {}
+CONTENTS_TITLE_AUTHOR_GAP_MM = 4.8
+CONTENTS_AUTHOR_ENTRY_GAP_MM = 5.2
+CONTENTS_ENTRY_GAP_MM = 6.2
+CONTENTS_SUBENTRY_GAP_MM = 5.2
 
-EXCLUDED_FROM_FORMAL_PDF = {"title_page.md", "index.md", "translation-status.md", "front_matter_guide.md"}
-PRE_CONTENTS_FRONT_PATHS = {"preface.md", "acknowledgments.md"}
+EXCLUDED_FROM_FORMAL_PDF = {"title_page.md", "index.md", "translation-status.md"}
+PRE_CONTENTS_FRONT_PATHS = {"preface.md", "acknowledgments.md", "front_matter_guide.md"}
 POST_CONTENTS_FRONT_PATHS = {"contributors.md", "abbreviations.md"}
 
-BOOK_AUTHORS = "Jun Yu, Ran Zhang, Wenzhuo Du, Guanlin Mu, ZhiLi Wang, Ke Wang, and Xin Xu"
+BOOK_AUTHORS = (
+    "Jun Yu, Changwen Chen, Fan Yu, Cong Wang, Yang Luo, Ran Zhang, Wenzhuo Du, "
+    "Xin Xu, Ke Wang, Zhili Wang, Zhongyi Liu, Xuhong Cao, Guanlin Mu, Guanjun Liu, "
+    "Yuefeng Zou, Lin Xu, Xinyu Chen, Fengxin Chen, Xuan Li, Gongpeng Zhao, Can Wang, "
+    "Feng Zhao, Ye Yu, Fang Gao, Jiaen Liang, Wei Huang, Shengping Liu, Qingsong Liu, "
+    "and Jianqing Sun"
+)
 PDF_FONT_REGULAR = "DataEngineeringBook-Regular"
 PDF_FONT_BOLD = "DataEngineeringBook-Bold"
 PDF_FONT_REGISTERED = False
@@ -64,43 +74,69 @@ PDF_FONT_CANDIDATES = {
     ],
 }
 SECTION_AUTHORS = {
-    **{f"part1/ch{chapter:02d}_": "Ke Wang" for chapter in range(1, 4)},
-    **{f"part2/ch{chapter:02d}_": "Ke Wang" for chapter in range(4, 8)},
-    **{f"part3/ch{chapter:02d}_": "Ke Wang" for chapter in range(8, 12)},
-    **{f"part4/ch{chapter:02d}_": "Ran Zhang" for chapter in range(12, 15)},
-    **{f"part5/ch{chapter:02d}_": "Ran Zhang" for chapter in range(15, 18)},
-    **{f"part6/ch{chapter:02d}_": "Ran Zhang" for chapter in range(18, 21)},
-    **{f"part7/ch{chapter:02d}_": "Wenzhuo Du" for chapter in range(21, 24)},
-    **{f"part8/ch{chapter:02d}_": "Wenzhuo Du" for chapter in range(24, 27)},
-    **{f"part9/ch{chapter:02d}_": "Wenzhuo Du" for chapter in range(27, 31)},
-    **{f"part10/ch{chapter:02d}_": "ZhiLi Wang" for chapter in range(31, 36)},
-    "part11/ch36_": "ZhiLi Wang; Xin Xu",
-    "part11/ch37_": "ZhiLi Wang; Xin Xu",
-    "part12/ch38_": "Guanlin Mu",
-    "part12/ch39_": "Guanlin Mu",
+    "part1/ch01_": "Jun Yu; Changwen Chen; Ke Wang",
+    "part1/ch02_": "Jun Yu; Changwen Chen; Ke Wang",
+    "part1/ch03_": "Jun Yu; Ke Wang; Changwen Chen",
+    "part2/ch04_": "Jun Yu; Ke Wang; Changwen Chen",
+    "part2/ch05_": "Jun Yu; Ke Wang; Changwen Chen",
+    "part2/ch06_": "Ke Wang; Fan Yu; Jun Yu",
+    "part2/ch07_": "Ke Wang; Fan Yu; Jun Yu",
+    "part3/ch08_": "Jun Yu; Ke Wang; Cong Wang",
+    "part3/ch09_": "Jun Yu; Ke Wang; Cong Wang",
+    "part3/ch10_": "Ke Wang; Cong Wang; Jun Yu",
+    "part3/ch11_": "Ke Wang; Cong Wang; Jun Yu",
+    "part4/ch12_": "Jun Yu; Ran Zhang; Yang Luo",
+    "part4/ch13_": "Jun Yu; Ran Zhang; Yang Luo",
+    "part4/ch14_": "Ran Zhang; Yang Luo; Jun Yu",
+    "part5/ch15_": "Cong Wang; Ran Zhang; Jun Yu",
+    "part5/ch16_": "Cong Wang; Ran Zhang; Jun Yu",
+    "part5/ch17_": "Ran Zhang; Yang Luo; Jun Yu",
+    "part6/ch18_": "Jun Yu; Ran Zhang; Zhongyi Liu",
+    "part6/ch19_": "Jun Yu; Ran Zhang; Zhongyi Liu",
+    "part6/ch20_": "Ran Zhang; Zhongyi Liu; Jun Yu",
+    "part7/ch21_": "Wenzhuo Du; Gongpeng Zhao; Jun Yu",
+    "part7/ch22_": "Wenzhuo Du; Gongpeng Zhao; Jun Yu",
+    "part7/ch23_": "Jun Yu; Wenzhuo Du; Gongpeng Zhao",
+    "part8/ch24_": "Jun Yu; Wenzhuo Du; Can Wang",
+    "part8/ch25_": "Wenzhuo Du; Can Wang; Jun Yu",
+    "part8/ch26_": "Wenzhuo Du; Can Wang; Jun Yu",
+    "part9/ch27_": "Ran Zhang; Feng Zhao; Wenzhuo Du",
+    "part9/ch28_": "Zhongyi Liu; Ye Yu; Wenzhuo Du",
+    "part9/ch29_": "Zhongyi Liu; Wenzhuo Du; Jun Yu",
+    "part9/ch30_": "Yang Luo; Fang Gao; Wenzhuo Du",
+    "part10/ch31_": "Jun Yu; Zhili Wang; Zhongyi Liu",
+    "part10/ch32_": "Jun Yu; Zhili Wang; Zhongyi Liu",
+    "part10/ch33_": "Zhili Wang; Zhongyi Liu; Jun Yu",
+    "part10/ch34_": "Yang Luo; Zhili Wang; Jun Yu",
+    "part10/ch35_": "Yang Luo; Zhili Wang; Jun Yu",
+    "part11/ch36_": "Zhili Wang; Xin Xu; Jun Yu",
+    "part11/ch37_": "Zhili Wang; Xin Xu; Jun Yu",
+    "part12/ch38_": "Guanlin Mu; Xuhong Cao",
+    "part12/ch39_": "Guanlin Mu; Xuhong Cao",
     "part12/ch40_": "Guanjun Liu; Yuefeng Zou",
     "part12/ch41_": "Lin Xu; Xinyu Chen",
     "part12/ch42_": "Fengxin Chen; Xuan Li",
-    "part12/ch43_": "Fengxin Chen; Xuan Li",
-    "part13/ch44_": "Ke Wang",
-    "part13/ch45_": "Xin Xu",
-    "part13/ch46_": "Xin Xu",
-    "part13/ch47_": "Ke Wang",
-    "part13/ch48_": "Ran Zhang",
-    **{f"part14/p{project:02d}_": "Xin Xu" for project in range(1, 11)},
-    "part14/p11_": "Ke Wang",
-    "part14/p12_": "Xin Xu",
-    "part14/p13_": "Ke Wang",
-    "part14/p14_": "Ran Zhang",
-    "part14/p15_": "caoxuhong",
-    "appendix_a_": "Xin Xu",
-    "appendix_b_": "Xin Xu",
-    "appendix_c_": "Xin Xu",
-    "appendix_d_": "ZhiLi Wang",
-    "appendix_e_": "ZhiLi Wang",
-    "appendix_f_": "ZhiLi Wang",
-    "appendix_g_": "Xuhong Cao",
-    "appendix_h_": "Xin Xu",
+    "part12/ch43_": "Xuan Li; Fengxin Chen",
+    "part13/ch44_": "Ke Wang; Jiaen Liang; Jun Yu",
+    "part13/ch45_": "Cong Wang; Xin Xu; Wei Huang",
+    "part13/ch46_": "Xin Xu; Shengping Liu; Fan Yu",
+    "part13/ch47_": "Xuhong Cao; Ke Wang; Qingsong Liu",
+    "part13/ch48_": "Ran Zhang; Jianqing Sun; Fan Yu",
+    "part14/p01_": "Xin Xu; Ran Zhang; Jun Yu",
+    "part14/p02_": "Xin Xu; Ran Zhang; Jun Yu",
+    "part14/p03_": "Jun Yu; Xin Xu; Wenzhuo Du",
+    "part14/p04_": "Xin Xu; Wenzhuo Du; Jun Yu",
+    "part14/p05_": "Xuhong Cao; Ke Wang; Jun Yu",
+    "part14/p06_": "Cong Wang; Xin Xu; Ke Wang",
+    "part14/p07_": "Jun Yu; Xin Xu; Zhili Wang",
+    "part14/p08_": "Jun Yu; Xin Xu; Zhili Wang",
+    "part14/p09_": "Zhongyi Liu; Xin Xu; Guanlin Mu",
+    "part14/p10_": "Ke Wang; Xin Xu; Guanlin Mu",
+    "part14/p11_": "Jun Yu; Ke Wang; Yang Luo",
+    "part14/p12_": "Cong Wang; Xin Xu; Yang Luo",
+    "part14/p13_": "Jun Yu; Ke Wang; Wenzhuo Du",
+    "part14/p14_": "Yang Luo; Ran Zhang; Wenzhuo Du",
+    "part14/p15_": "Xuhong Cao; Zhongyi Liu; Jun Yu",
 }
 
 
@@ -168,7 +204,7 @@ CSS = r"""
 body {
   font-family:
     "Times New Roman", "Times", "Nimbus Roman", serif;
-  font-size: 11pt;
+  font-size: 11.8pt;
   line-height: 1.45;
   letter-spacing: 0;
   color: var(--ink);
@@ -572,6 +608,14 @@ class NavItem:
     group_slug: str
 
 
+@dataclass
+class TocEntry:
+    title: str
+    level: int
+    page_label: str
+    authors: str = ""
+
+
 def find_en_nav(config: dict[str, Any]) -> list[Any]:
     for plugin in config.get("plugins", []):
         if isinstance(plugin, dict) and "i18n" in plugin:
@@ -766,7 +810,7 @@ def transform_section_opening(html_body: str, source_path: str) -> str:
     patterns = [
         (r"<h1>Chapter\s+\d+:\s*([^<]+)</h1>", r"<h1>\1</h1>"),
         (r"<h1>Project\s+\d+:\s*([^<]+)</h1>", r"<h1>\1</h1>"),
-        (r"<h1>Appendix\s+[A-G]:\s*([^<]+)</h1>", r"<h1>\1</h1>"),
+        (r"<h1>Appendix\s+[A-H]:\s*([^<]+)</h1>", r"<h1>\1</h1>"),
     ]
     for pattern, replacement in patterns:
         html_body, count = re.subn(pattern, replacement, html_body, count=1)
@@ -989,7 +1033,19 @@ def generate_opening_front_pdf(path: Path, stats: dict[str, int]) -> int:
     return page_count
 
 
-def generate_contents_pdf(path: Path, toc_entries: list[tuple[str, int, str]], start_page_number: int) -> int:
+def normalize_toc_entry(entry: TocEntry | tuple[str, int, str]) -> TocEntry:
+    if isinstance(entry, TocEntry):
+        return entry
+    title, level, page_label = entry
+    return TocEntry(title=title, level=level, page_label=page_label)
+
+
+def toc_entry_for_nav_item(item: NavItem, page_label: str) -> TocEntry:
+    authors = author_line_for_path(item.path) if classify_path(item.path) in {"chapter", "project"} else ""
+    return TocEntry(title=item.title, level=item.level, page_label=page_label, authors=authors)
+
+
+def generate_contents_pdf(path: Path, toc_entries: list[TocEntry | tuple[str, int, str]], start_page_number: int) -> int:
     try:
         from reportlab.lib import colors
         from reportlab.lib.pagesizes import mm
@@ -1032,8 +1088,12 @@ def generate_contents_pdf(path: Path, toc_entries: list[tuple[str, int, str]], s
 
     contents_page_no = start_page_number
     y = write_contents_page_header(contents_page_no)
-    min_y = bottom + 7 * mm
-    for title, level, page_label in toc_entries:
+    min_y = bottom + 10 * mm
+    for raw_entry in toc_entries:
+        entry = normalize_toc_entry(raw_entry)
+        title = entry.title
+        level = entry.level
+        page_label = entry.page_label
         if y < min_y:
             footer(to_roman(contents_page_no))
             contents_page_no += 1
@@ -1066,7 +1126,16 @@ def generate_contents_pdf(path: Path, toc_entries: list[tuple[str, int, str]], s
             c.setDash(1, 2)
             c.line(dots_start, y + 1.2, dots_end, y + 1.2)
             c.setDash()
-        y -= 5.0 * mm if level <= 2 else 4.4 * mm
+        if entry.authors:
+            y -= CONTENTS_TITLE_AUTHOR_GAP_MM * mm
+            c.setFont(regular_font, 8.3)
+            c.setFillColor(colors.HexColor("#4f5967"))
+            author_text = entry.authors.replace(";", ",")
+            author_x = left + indent + (4 * mm if level <= 2 else 0)
+            c.drawString(author_x, y, author_text)
+            y -= CONTENTS_AUTHOR_ENTRY_GAP_MM * mm
+        else:
+            y -= CONTENTS_ENTRY_GAP_MM * mm if level <= 2 else CONTENTS_SUBENTRY_GAP_MM * mm
     footer(to_roman(contents_page_no))
     c.save()
     return page_count
@@ -1074,7 +1143,7 @@ def generate_contents_pdf(path: Path, toc_entries: list[tuple[str, int, str]], s
 
 def generate_book_front_pdf(
     path: Path,
-    toc_entries: list[tuple[str, int, str]],
+    toc_entries: list[TocEntry | tuple[str, int, str]],
     stats: dict[str, int],
 ) -> int:
     """Backward-compatible front matter generator for non-Springer split flows."""
@@ -1187,6 +1256,48 @@ def merge_pdfs(parts: list[Path], output: Path, items: list[NavItem] | None = No
     with output.open("wb") as handle:
         writer.write(handle)
     print(f"[ok] merged PDF written: {output} ({output.stat().st_size / 1024 / 1024:.1f} MB)")
+
+
+def merge_plain_pdfs(parts: list[Path], output: Path) -> None:
+    try:
+        from pypdf import PdfWriter
+    except Exception as exc:  # pragma: no cover - dependency check
+        raise RuntimeError("pypdf is required to merge PDF files") from exc
+
+    writer = PdfWriter()
+    for part in parts:
+        writer.append(str(part))
+    output.parent.mkdir(parents=True, exist_ok=True)
+    with output.open("wb") as handle:
+        writer.write(handle)
+    print(f"[ok] merged PDF written: {output} ({output.stat().st_size / 1024 / 1024:.1f} MB)")
+
+
+def formal_front_matter_part_pdf(slug: str) -> Path:
+    matches = sorted(PARTS_DIR.glob(f"*-{slug}.pdf"))
+    if not matches:
+        raise FileNotFoundError(
+            f"formal front-matter part PDF is missing for {slug!r}; run the full PDF export before submission PDFs"
+        )
+    return matches[0]
+
+
+def export_submission_front_matter_pdf(output: Path) -> list[Path]:
+    front_parts = [
+        OPENING_FRONT_PDF,
+        formal_front_matter_part_pdf("front-matter-before-contents"),
+        CONTENTS_PDF,
+        formal_front_matter_part_pdf("front-matter-after-contents"),
+    ]
+    missing = [part for part in front_parts if not part.exists()]
+    if missing:
+        missing_list = ", ".join(str(part) for part in missing)
+        raise FileNotFoundError(
+            "formal front matter PDF assets are missing; run the full PDF export before submission PDFs: "
+            + missing_list
+        )
+    merge_plain_pdfs(front_parts, output)
+    return front_parts
 
 
 def merge_formal_book_pdf(
@@ -1418,15 +1529,15 @@ def compute_toc_entries(
     *,
     front_pages: int,
     first_body_page: int,
-) -> list[tuple[str, int, str]]:
+) -> list[TocEntry]:
     from pypdf import PdfReader
 
-    entries: list[tuple[str, int, str]] = []
+    entries: list[TocEntry] = []
     groups = group_items(items)
     content_offset = front_pages
     for (_, title, grouped), part in zip(groups, parts):
         reader = PdfReader(str(part))
-        entries.append((title, 1, build_page_number_label(content_offset + 1, first_body_page)))
+        entries.append(TocEntry(title, 1, build_page_number_label(content_offset + 1, first_body_page)))
         local_pages = locate_item_pages(
             reader,
             grouped,
@@ -1436,7 +1547,7 @@ def compute_toc_entries(
         for item in grouped:
             local_page = local_pages.get(item.path, 0)
             absolute_page = content_offset + local_page + 1
-            entries.append((item.title, item.level, build_page_number_label(absolute_page, first_body_page)))
+            entries.append(toc_entry_for_nav_item(item, build_page_number_label(absolute_page, first_body_page)))
         content_offset += len(reader.pages)
     return entries
 
@@ -1449,16 +1560,16 @@ def compute_formal_toc_entries(
     contents_pages: int,
     first_body_page: int,
     contents_after_group: int,
-) -> list[tuple[str, int, str]]:
+) -> list[TocEntry]:
     from pypdf import PdfReader
 
-    entries: list[tuple[str, int, str]] = []
+    entries: list[TocEntry] = []
     content_offset = opening_pages
     for index, ((_, title, grouped), part) in enumerate(zip(groups, parts)):
         reader = PdfReader(str(part))
         is_artificial_front_group = title in {"Front Matter Before Contents", "Front Matter After Contents"}
         if not is_artificial_front_group:
-            entries.append((title, 1, build_page_number_label(content_offset + 1, first_body_page)))
+            entries.append(TocEntry(title, 1, build_page_number_label(content_offset + 1, first_body_page)))
         local_pages = locate_item_pages(
             reader,
             grouped,
@@ -1469,7 +1580,9 @@ def compute_formal_toc_entries(
             local_page = local_pages.get(item.path, 0)
             absolute_page = content_offset + local_page + 1
             entry_level = item.level if not is_artificial_front_group else 1
-            entries.append((item.title, entry_level, build_page_number_label(absolute_page, first_body_page)))
+            toc_entry = toc_entry_for_nav_item(item, build_page_number_label(absolute_page, first_body_page))
+            toc_entry.level = entry_level
+            entries.append(toc_entry)
         content_offset += len(reader.pages)
         if index == contents_after_group:
             content_offset += contents_pages
@@ -1668,12 +1781,10 @@ def export_submission_pdfs(items: list[NavItem], timeout: int, include_mathjax: 
         "| No. | Title | Source | PDF |",
         "| --- | --- | --- | --- |",
     ]
-    front_html_path = SUBMISSION_PDF_DIR / "00_front_matter.html"
     front_pdf_path = SUBMISSION_PDF_DIR / "00_front_matter.pdf"
-    write_html(front_html_path, build_front_matter_reference_html(items, include_mathjax))
-    export_pdf(front_html_path, front_pdf_path, timeout, min_size=10_000)
+    front_parts = export_submission_front_matter_pdf(front_pdf_path)
     manifest_lines.append(
-        f"| Front | Front matter | generated title page plus `{', '.join(item.path for item in front_matter_pdf_items(items))}` | `{front_pdf_path.name}` |"
+        f"| Front | Front matter | formal opening front matter, contents, and `{', '.join(item.path for item in front_matter_pdf_items(items))}` | `{front_pdf_path.name}` |"
     )
 
     manuscript_items = submission_pdf_items(items)
